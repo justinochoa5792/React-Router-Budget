@@ -1,7 +1,7 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 //Routes
-import Dashboard, { dashboardLoader } from "./pages/Dashboard";
+import Dashboard, { dashboadAction, dashboardLoader } from "./pages/Dashboard";
 import Error from "./pages/Error";
 import Main, { mainLoader } from "./layout/Main";
 import { logoutAction } from "./logout";
@@ -20,6 +20,7 @@ function App() {
         {
           path: "/",
           element: <Dashboard />,
+          action: dashboadAction,
           loader: mainLoader,
           errorElement: <Error />,
         },
