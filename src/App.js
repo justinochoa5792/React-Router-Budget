@@ -18,10 +18,10 @@ function App() {
       errorElement: <Error />,
       children: [
         {
-          path: "/",
+          index: true,
           element: <Dashboard />,
+          loader: dashboardLoader,
           action: dashboadAction,
-          loader: mainLoader,
           errorElement: <Error />,
         },
         {
