@@ -22,6 +22,7 @@ const Intro = () => {
             autoComplete="given-name"
             required
           />
+          <input type="hidden" name="_action" value="newUser" />
           <button type="submit" className="btn btn--dark">
             Create Account
             <UserPlusIcon width={20} />
