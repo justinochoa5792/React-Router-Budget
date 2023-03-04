@@ -3,10 +3,11 @@ import React from "react";
 import { useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
 //Helper Function
-import { createBudget, fetchData } from "../Helpers";
+import { createBudget, createExpense, fetchData } from "../Helpers";
 //components
 import Intro from "./Intro";
 import AddBudgetForm from "../layout/AddBudgetForm";
+import AddExpenseForm from "../layout/AddExpenseForm";
 
 export function dashboardLoader() {
   const userName = fetchData("userName");
@@ -37,6 +38,18 @@ export async function dashboadAction({ request }) {
       throw new Error("There was a problem creating you budget");
     }
   }
+  if (_action === "createExpense") {
+    try {
+      createExpense({
+        name: values.newExpense,
+        amount: values.newExpenseAmount,
+        budgetId: values.newExpenseBudget,
+      });
+      return toast.success(`Expense ${values.newExpense} created!`);
+    } catch (e) {
+      throw new Error("There was a problem creating your expense.");
+    }
+  }
 }
 
 const Dashboard = () => {
@@ -49,11 +62,20 @@ const Dashboard = () => {
             Welcome back, <span class="accent">{userName}</span>
           </h1>
           <div className="grid-sm">
-            <div className="grid-lg">
-              <div className="flex-lg">
+            {budgets && budgets.length > 0 ? (
+              <div className="grid-lg">
+                <div className="flex-lg">
+                  <AddBudgetForm />
+                  <AddExpenseForm budgets={budgets} />
+                </div>
+              </div>
+            ) : (
+              <div className="grid-sm">
+                <p>Personal budgeting is the secret to financial freedom.</p>
+                <p>Create a budget to get started!</p>
                 <AddBudgetForm />
               </div>
-            </div>
+            )}
           </div>
         </div>
       ) : (
