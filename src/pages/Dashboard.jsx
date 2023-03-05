@@ -8,6 +8,7 @@ import { createBudget, createExpense, fetchData } from "../Helpers";
 import Intro from "./Intro";
 import AddBudgetForm from "../layout/AddBudgetForm";
 import AddExpenseForm from "../layout/AddExpenseForm";
+import BudgetItem from "./BudgetItem";
 
 export function dashboardLoader() {
   const userName = fetchData("userName");
@@ -67,6 +68,12 @@ const Dashboard = () => {
                 <div className="flex-lg">
                   <AddBudgetForm />
                   <AddExpenseForm budgets={budgets} />
+                </div>
+                <h2>Existing Budgets</h2>
+                <div class="budgets">
+                  {budgets.map((budget) => {
+                    return <BudgetItem key={budget.id} budget={budget} />;
+                  })}
                 </div>
               </div>
             ) : (
