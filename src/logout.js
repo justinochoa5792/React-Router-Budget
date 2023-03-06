@@ -4,6 +4,8 @@ import { deleteItem } from "./Helpers";
 
 export async function logoutAction() {
   deleteItem({ key: "userName" });
+  deleteItem({ key: "budgets" });
+  deleteItem({ key: "expenses" });
   toast.success("You've Deleted Your Account");
   return redirect("/");
 }
