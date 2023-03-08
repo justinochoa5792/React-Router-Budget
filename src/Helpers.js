@@ -73,3 +73,8 @@ export const formatCurrency = (amount) => {
 
 export const formatDateToLocaleString = (epoch) =>
   new Date(epoch).toLocaleDateString();
+
+export const getAllMatchingItems = ({ category, key, value }) => {
+  const data = fetchData(category) ?? [];
+  return data.filter((item) => item[key] === value);
+};
